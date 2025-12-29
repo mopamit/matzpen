@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>המצפן הניהולי - המסע שלך</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            overflow-x: hidden;
+        }
+        
+        /* Custom Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background: #4f46e5;
+            cursor: pointer;
+            margin-top: -12px;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.5);
+            transition: transform 0.1s;
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #e0e7ff;
+            border-radius: 4px;
+        }
+
+        /* Card Animations */
+        .card-enter {
+            animation: fadeInRight 0.5s ease-out forwards;
+        }
+        .card-exit {
+            animation: fadeOutLeft 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeOutLeft {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(20px); }
+        }
+
+        /* Rating Button Selection */
+        .rating-btn.selected {
+            background-color: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+
+    <!-- Top Progress Bar (Hidden on Intro) -->
+    <div id="progress-container" class="fixed top-0 left-0 w-full h-2 bg-gray-200 hidden z-50">
+        <div id="progress-bar" class="h-full bg-indigo-600 transition-all duration-500 ease-out" style="width: 0%"></div>
+    </div>
+
+    <!-- Main Card Container -->
+    <div class="w-full max-w-2xl bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white/50 relative min-h-[500px] flex flex-col">
+        
+        <!-- Decorative Background Circles -->
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-indigo-100 rounded-full blur-3xl opacity-50"></div>
+        <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-purple-100 rounded-full blur-3xl opacity-50"></div>
+
+        <div class="relative z-10 flex-grow flex flex-col p-8 md:p-12 justify-center">
+
+            <!-- SCREEN: INTRO -->
+            <div id="screen-intro" class="text-center space-y-8 animate__animated animate__fadeIn">
+                <div class="inline-block p-4 rounded-full bg-indigo-50 mb-2">
+                    <span class="text-4xl">🧭</span>
+                </div>
+                <div>
+                    <h1 class="text-4xl font-bold text-gray-800 mb-4 tracking-tight">המצפן הניהולי</h1>
+                    <p class="text-xl text-gray-600 font-light">
+                        בואו נצא למסע קצר לגילוי סגנון הניהול שלך<br>ובניית המסלול המדויק עבורך בבית המדרש.
+                    </p>
+                </div>
+                <button onclick="startApp()" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-indigo-600 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-700 hover:shadow-lg transform hover:-translate-y-1">
+                    מתחילים! 
+                    <span class="mr-2 group-hover:translate-x-1 transition-transform">←</span>
+                </button>
+            </div>
+
+            <!-- SCREEN: STYLE QUESTIONS (Slider) -->
+            <div id="screen-style" class="hidden h-full flex flex-col justify-between">
+                <div class="text-center mb-8">
+                    <span class="text-xs font-bold tracking-widest text-indigo-500 uppercase">חלק א: הסגנון שלי</span>
+                    <h2 id="style-q-text" class="text-2xl font-bold text-gray-800 mt-2 h-20 flex items-center justify-center">
+                        <!-- Question Text Injected Here -->
+                    </h2>
+                </div>
+
+                <div class="flex-grow flex flex-col justify-center space-y-10">
+                    <!-- Custom Range Slider Visuals -->
+                    <div class="relative pt-1">
+                        <div class="flex justify-between text-sm font-medium text-gray-500 mb-4 px-2">
+                            <span id="style-label-right" class="w-1/3 text-right text-indigo-800 font-bold"></span>
+                            <span id="style-label-left" class="w-1/3 text-left text-purple-800 font-bold"></span>
+                        </div>
+                        
+                        <input type="range" min="1" max="5" value="3" step="1" id="style-slider" class="w-full">
+                        
+                        <div class="flex justify-between text-xs text-gray-400 mt-2 px-1">
+                            <span>ביצוע</span>
+                            <span>|</span>
+                            <span>|</span>
+                            <span>|</span>
+                            <span>חזון</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-4 bg-gray-50 rounded-xl border border-gray-100 text-gray-600 text-sm italic" id="feedback-text">
+                        הזיזו את המתג כדי לבחור את המיקום המדויק שלכם
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-center">
+                    <button onclick="nextStyleQuestion()" class="bg-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-indigo-700 hover:scale-110 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCREEN: TRANSITION -->
+            <div id="screen-transition" class="hidden text-center animate__animated animate__fadeIn">
+                <div class="text-6xl mb-6 animate-bounce">✨</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">מצוין!</h2>
+                <p class="text-xl text-gray-600">עכשיו נעבור למיפוי קצר של הצרכים בבית הספר...</p>
+            </div>
+
+            <!-- SCREEN: CONTENT QUESTIONS (Rating Buttons) -->
+            <div id="screen-content" class="hidden h-full flex flex-col justify-between">
+                <div class="text-center mb-6">
+                    <span class="text-xs font-bold tracking-widest text-green-600 uppercase">חלק ב: מיפוי צרכים</span>
+                    <h2 id="content-q-title" class="text-xl md:text-2xl font-bold text-gray-800 mt-2">
+                        <!-- Content Title Injected Here -->
+                    </h2>
+                    <p class="text-gray-500 mt-2 text-sm">עד כמה התחום הזה מוטמע אצלכם?</p>
+                </div>
+
+                <div class="flex-grow flex flex-col items-center justify-center space-y-6">
+                    <div class="flex w-full justify-between items-center max-w-md px-2">
+                        <span class="text-sm text-gray-400">טעון שיפור</span>
+                        <span class="text-sm text-gray-400">חזק מאוד</span>
+                    </div>
+                    
+                    <div class="flex w-full justify-between max-w-md gap-2" id="rating-container">
+                        <button onclick="selectRating(1)" class="rating-btn w-12 h-12 md:w-16 md:h-16 rounded-2xl border-2 border-gray-200 text-gray-400 font-bold text-xl hover:border-indigo-300 transition-all">1</button>
+                        <button onclick="selectRating(2)" class="rating-btn w-12 h-12 md:w-16 md:h-16 rounded-2xl border-2 border-gray-200 text-gray-400 font-bold text-xl hover:border-indigo-300 transition-all">2</button>
+                        <button onclick="selectRating(3)" class="rating-btn w-12 h-12 md:w-16 md:h-16 rounded-2xl border-2 border-gray-200 text-gray-400 font-bold text-xl hover:border-indigo-300 transition-all">3</button>
+                        <button onclick="selectRating(4)" class="rating-btn w-12 h-12 md:w-16 md:h-16 rounded-2xl border-2 border-gray-200 text-gray-400 font-bold text-xl hover:border-indigo-300 transition-all">4</button>
+                        <button onclick="selectRating(5)" class="rating-btn w-12 h-12 md:w-16 md:h-16 rounded-2xl border-2 border-gray-200 text-gray-400 font-bold text-xl hover:border-indigo-300 transition-all">5</button>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-center opacity-0 transition-opacity duration-300" id="content-next-btn">
+                     <button onclick="nextContentQuestion()" class="bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-green-700 hover:scale-110 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCREEN: PROCESSING -->
+            <div id="screen-processing" class="hidden flex-col items-center justify-center text-center space-y-6">
+                <div class="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+                <h3 class="text-xl font-medium text-gray-700">מעבד נתונים...</h3>
+            </div>
+
+            <!-- SCREEN: RESULTS -->
+            <div id="screen-results" class="hidden animate__animated animate__fadeInUp">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">הפרופיל שלך</h2>
+                    <p class="text-gray-500">הנה ההמלצה שלנו לבית המדרש</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Style Card -->
+                    <div class="bg-gradient-to-br from-indigo-50 to-white p-6 rounded-2xl border border-indigo-100 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-indigo-500"></div>
+                        <h3 class="text-lg font-bold text-indigo-800 mb-2 flex items-center">
+                            <span class="text-2xl ml-2">👤</span> הסגנון הניהולי
+                        </h3>
+                        <p id="res-style-text" class="text-gray-700 text-sm mb-3 leading-relaxed"></p>
+                        <div class="bg-white/50 p-3 rounded-lg border border-indigo-100">
+                             <span class="block text-xs text-gray-500 font-bold uppercase">מסלול מומלץ:</span>
+                             <span id="res-style-rec" class="text-indigo-700 font-bold text-lg"></span>
+                        </div>
+                    </div>
+
+                    <!-- Content Card -->
+                    <div class="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-100 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-green-500"></div>
+                        <h3 class="text-lg font-bold text-green-800 mb-2 flex items-center">
+                            <span class="text-2xl ml-2">📚</span> מיקוד תוכן
+                        </h3>
+                        <p id="res-content-text" class="text-gray-700 text-sm mb-3 leading-relaxed"></p>
+                        <div class="bg-white/50 p-3 rounded-lg border border-green-100">
+                             <span class="block text-xs text-gray-500 font-bold uppercase">נושא מומלץ:</span>
+                             <span id="res-content-rec" class="text-green-700 font-bold text-lg"></span>
+                        </div>
+                    </div>
+
+                    <!-- Final Summary -->
+                    <div class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg text-center">
+                         <p id="res-summary" class="text-lg font-medium opacity-90 leading-relaxed"></p>
+                    </div>
+
+                    <div class="text-center pt-4">
+                        <button onclick="location.reload()" class="text-sm text-gray-400 hover:text-indigo-600 underline">התחל מחדש</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DATA & LOGIC -->
+    <script>
+        // --- DATA ---
+        const styleQuestions = [
+            {
+                q: "כשעולה שיח על שינוי פדגוגי...",
+                right: "אני מיד חושב על סדירויות וכח אדם",
+                left: "אני חושב אילו אפשרויות יפתחו"
+            },
+            {
+                q: "כשמורים מתקשים לאמץ תפיסה...",
+                right: "מפרק לצעדים פרקטיים לפתרון",
+                left: "מחבר ל'לשם מה' ולרעיון הגדול"
+            },
+            {
+                q: "בחשיבה קדימה על בית הספר...",
+                right: "בונה תוכנית עבודה מסודרת לשנתיים",
+                left: "מדמיין את החלום והקומה הבאה"
+            },
+            {
+                q: "בנוגע לליווי אישי (מנטורינג)...",
+                right: "מתרגם לעלויות ושיבוץ במערכת",
+                left: "מתרגש מההזדמנות לגעת בלב התלמיד"
+            },
+            {
+                q: "תפיסת התפקיד מול הצוות...",
+                right: "נוכחות פעילה וניהול השוטף",
+                left: "חיבור רגשי וערכי לתהליך"
+            }
+        ];
+
+        const contentQuestions = [
+            { id: 'tzaam', title: 'מערכת שעות וסדירויות (תצא"מ)', name: 'סדירויות ותצא"מ', focus: 'בניית סדירויות פדגוגיות' },
+            { id: 'team', title: 'מפגשי צוות ופיתוח מקצועי', name: 'פיתוח צוות ומנהיגות', focus: 'רתימת צוות ומנהיגות' },
+            { id: 'tech', title: 'שימוש בנתונים וטכנולוגיה', name: 'טכנולוגיה ונתונים', focus: 'טכנולוגיה וניהול נתונים' },
+            { id: 'pedagogy', title: 'מבנה הוראה (שערים/תחומים)', name: 'מבנה הוראה', focus: 'פדגוגיה וחלוקת ידע' }
+        ];
+
+        // --- STATE ---
+        let currentStep = 'intro'; // intro, style, transition, content, processing, results
+        let styleIdx = 0;
+        let contentIdx = 0;
+        let styleAnswers = [];
+        let contentAnswers = []; // Array of objects {id, val, ...}
+
+        // --- DOM ELEMENTS ---
+        const progressBar = document.getElementById('progress-bar');
+        const progressContainer = document.getElementById('progress-container');
+        
+        // --- FUNCTIONS ---
+
+        function updateProgress() {
+            const totalQs = styleQuestions.length + contentQuestions.length;
+            const current = styleAnswers.length + contentAnswers.length;
+            const pct = (current / totalQs) * 100;
+            progressBar.style.width = pct + '%';
+        }
+
+        function switchScreen(fromId, toId) {
+            const fromEl = document.getElementById(fromId);
+            const toEl = document.getElementById(toId);
+
+            fromEl.classList.add('hidden');
+            toEl.classList.remove('hidden');
+            
+            // Add animation class to new screen
+            toEl.classList.add('card-enter');
+            setTimeout(() => toEl.classList.remove('card-enter'), 500);
+        }
+
+        function startApp() {
+            progressContainer.classList.remove('hidden');
+            switchScreen('screen-intro', 'screen-style');
+            loadStyleQuestion();
+        }
+
+        // --- STYLE LOGIC ---
+
+        function loadStyleQuestion() {
+            const q = styleQuestions[styleIdx];
+            document.getElementById('style-q-text').innerText = q.q;
+            document.getElementById('style-label-right').innerText = q.right;
+            document.getElementById('style-label-left').innerText = q.left;
+            
+            // Reset slider to middle
+            const slider = document.getElementById('style-slider');
+            slider.value = 3;
+            updateSliderFeedback(3);
+        }
+
+        document.getElementById('style-slider').addEventListener('input', (e) => {
+            updateSliderFeedback(e.target.value);
+        });
+
+        function updateSliderFeedback(val) {
+            const fb = document.getElementById('feedback-text');
+            if(val == 1) fb.innerText = "אני לגמרי בצד הביצועי/תפעולי";
+            else if(val == 2) fb.innerText = "נוטה יותר לביצוע וסדר";
+            else if(val == 3) fb.innerText = "אני משלב/ת בין העולמות";
+            else if(val == 4) fb.innerText = "נוטה יותר לחזון ורעיון";
+            else if(val == 5) fb.innerText = "אני לגמרי בצד החזוני/רעיוני";
+        }
+
+        function nextStyleQuestion() {
+            const val = parseInt(document.getElementById('style-slider').value);
+            styleAnswers.push(val);
+            updateProgress();
+
+            styleIdx++;
+            if (styleIdx < styleQuestions.length) {
+                // Animate out current content slightly before loading next
+                const container = document.getElementById('screen-style');
+                container.classList.add('card-exit');
+                setTimeout(() => {
+                    container.classList.remove('card-exit');
+                    container.classList.add('card-enter'); // Re-enter animation
+                    loadStyleQuestion();
+                    setTimeout(() => container.classList.remove('card-enter'), 500);
+                }, 300);
+            } else {
+                // Done with Style -> Go to Transition
+                switchScreen('screen-style', 'screen-transition');
+                setTimeout(() => {
+                    switchScreen('screen-transition', 'screen-content');
+                    loadContentQuestion();
+                }, 2500);
+            }
+        }
+
+        // --- CONTENT LOGIC ---
+
+        function loadContentQuestion() {
+            const q = contentQuestions[contentIdx];
+            document.getElementById('content-q-title').innerText = q.title;
+            
+            // Reset buttons
+            document.querySelectorAll('.rating-btn').forEach(btn => btn.classList.remove('selected'));
+            document.getElementById('content-next-btn').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function selectRating(val) {
+            // Visual selection
+            document.querySelectorAll('.rating-btn').forEach(btn => {
+                btn.classList.remove('selected');
+                if(parseInt(btn.innerText) === val) btn.classList.add('selected');
+            });
+
+            // Store temporary value
+            window.currentContentRating = val;
+
+            // Show Next Button
+            const nextBtn = document.getElementById('content-next-btn');
+            nextBtn.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function nextContentQuestion() {
+            const val = window.currentContentRating;
+            const currentQ = contentQuestions[contentIdx];
+            
+            contentAnswers.push({ ...currentQ, val: val });
+            updateProgress();
+
+            contentIdx++;
+            if (contentIdx < contentQuestions.length) {
+                const container = document.getElementById('screen-content');
+                container.classList.add('card-exit');
+                setTimeout(() => {
+                    container.classList.remove('card-exit');
+                    container.classList.add('card-enter');
+                    loadContentQuestion();
+                    setTimeout(() => container.classList.remove('card-enter'), 500);
+                }, 300);
+            } else {
+                finishGame();
+            }
+        }
+
+        // --- RESULTS LOGIC ---
+
+        function finishGame() {
+            switchScreen('screen-content', 'screen-processing');
+            setTimeout(() => {
+                calculateAndShowResults();
+                switchScreen('screen-processing', 'screen-results');
+                progressContainer.classList.add('hidden'); // Hide progress bar at end
+            }, 2000);
+        }
+
+        function calculateAndShowResults() {
+            // 1. Style Analysis
+            const styleSum = styleAnswers.reduce((a, b) => a + b, 0);
+            const styleAvg = styleSum / styleAnswers.length;
+
+            let styleText = "";
+            let styleRec = "";
+            let styleType = ""; 
+
+            if (styleAvg >= 3.5) {
+                styleType = "vision";
+                styleText = "הפרופיל שלך הוא של מנהל/ת \"חזוני/ת\". את/ה רואה למרחוק, מחובר/ת לרעיונות הגדולים ולמשמעות. האתגר שלך הוא לעיתים בהורדת הרעיונות לקרקע הפרקטית.";
+                styleRec = "היוועצות והתנסות מעשית (Focus on Execution)";
+            } else if (styleAvg <= 2.5) {
+                styleType = "execution";
+                styleText = "הפרופיל שלך הוא של מנהל/ת \"ביצועיסט/ית\". את/ה אלוף/ה בתרגום משימות למעשים, בסדר ובארגון. האתגר הוא לעיתים לעצור ולהתחבר לרוח ולחזון.";
+                styleRec = "שיחות השראה וחיבור ללשם מה (Focus on Vision)";
+            } else {
+                styleType = "balanced";
+                styleText = "את/ה נמצא/ת באיזון מרשים בין הראייה התפעולית לחזונית. את/ה יודע/ת לשלב בין החלום למעשה בצורה מאוזנת.";
+                styleRec = "שילוב של התנסות מעשית עם העמקת הידע";
+            }
+
+            // 2. Content Analysis (Find Weakest)
+            // Sort by value (ascending), then by original index for stability
+            const sortedContent = [...contentAnswers].sort((a, b) => a.val - b.val);
+            const weakest = sortedContent[0];
+
+            // 3. Populate UI
+            document.getElementById('res-style-text').innerText = styleText;
+            document.getElementById('res-style-rec').innerText = styleRec;
+            
+            document.getElementById('res-content-text').innerText = `מתוך המיפוי עולה כי התחום של "${weakest.name}" הוא הזדמנות הצמיחה המשמעותית ביותר עבורך כרגע.`;
+            document.getElementById('res-content-rec').innerText = weakest.focus;
+
+            // 4. Summary
+            let summary = "";
+            if (styleType === "vision") {
+                summary = `לסיכום: כדי להגשים את החזון שלך בתחום ה${weakest.name}, המסלול המדויק עבורך הוא כזה שיתן לך כלים פרקטיים ליישום (התנסות).`;
+            } else if (styleType === "execution") {
+                summary = `לסיכום: כדי להטמיע בהצלחה תהליכים של ${weakest.name}, המסלול המדויק עבורך הוא כזה שיתן לך השראה וחיבור למהות (רוח).`;
+            } else {
+                summary = `לסיכום: מומלץ להתמקד בסדנאות ${weakest.name} המשלבות למידה של תשתיות עם חשיבה על העתיד.`;
+            }
+            document.getElementById('res-summary').innerText = summary;
+        }
+
+    </script>
+</body>
+</html>
