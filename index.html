@@ -69,6 +69,22 @@
             border-color: #4f46e5;
             transform: scale(1.05);
         }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c7c7c7;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a0a0a0;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
@@ -211,15 +227,12 @@
                 <div class="space-y-6">
                     <!-- Style Card -->
                     <div class="bg-white p-6 rounded-2xl border-t-4 border-indigo-500 shadow-md">
-                        <h3 class="text-lg font-bold text-indigo-900 mb-2 flex items-center">
+                        <h3 class="text-lg font-bold text-indigo-900 mb-4 flex items-center">
                             <span class="text-2xl ml-2">💡</span> הפרופיל הניהולי שלך
                         </h3>
-                        <p id="res-style-text" class="text-gray-700 text-sm mb-4 leading-relaxed font-medium"></p>
                         
-                        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
-                             <span class="block text-xs text-indigo-500 font-bold uppercase mb-1">רצועות תוכן מומלצות:</span>
-                             <span id="res-style-rec" class="text-indigo-700 font-bold text-lg leading-tight block"></span>
-                        </div>
+                        <!-- Full Text from file goes here -->
+                        <div id="res-style-text" class="text-gray-800 text-base mb-4 leading-relaxed bg-indigo-50/50 p-4 rounded-lg border border-indigo-50"></div>
                     </div>
 
                     <!-- Content Card -->
@@ -228,7 +241,7 @@
                             <span class="text-2xl ml-2">📊</span> המיקוד המקצועי
                         </h3>
                         <p class="text-gray-600 text-sm mb-2">זיהינו שהתחומים הבאים דורשים חיזוק:</p>
-                        <ul id="res-content-list" class="list-disc list-inside text-sm text-gray-700 space-y-1 mb-4">
+                        <ul id="res-content-list" class="list-disc list-inside text-sm text-gray-700 space-y-1 mb-4 font-medium">
                             <!-- Weakest items injected here -->
                         </ul>
                         <div class="bg-green-50 p-4 rounded-xl border border-green-100">
@@ -251,7 +264,7 @@
     <!-- DATA & LOGIC -->
     <script>
         // --- DATA ---
-        // Questions updated from file: בחן את עצמך למנהלים לקראת בית המדרש (1).docx
+        // Questions from file
         const styleQuestions = [
             // Arena A: Learning Perception
             {
@@ -385,9 +398,6 @@
 
         function updateSliderFeedback(val) {
             const fb = document.getElementById('feedback-text');
-            // Logic updated to match new questions direction
-            // 1 = Right side (Execution/Structure)
-            // 5 = Left side (Vision/Meaning)
             if(val == 1) fb.innerText = "אני מזדהה בעיקר עם הצד התכליתי/ביצועי";
             else if(val == 2) fb.innerText = "נוטה לצד התכליתי";
             else if(val == 3) fb.innerText = "אני משלב/ת בין העולמות";
@@ -473,47 +483,55 @@
         }
 
         function calculateAndShowResults() {
-            // 1. Style Analysis (Updated Logic)
+            // 1. Style Analysis
             const styleSum = styleAnswers.reduce((a, b) => a + b, 0);
             const styleAvg = styleSum / styleAnswers.length;
 
-            let styleText = "";
-            let styleRec = "";
+            let styleFullText = "";
             
-            // Logic from file:
-            // High score (4-5) = Visionary -> Needs Practical tools
-            // Low score (1-2) = Execution/Operational -> Needs Inspiration
-
+            // Logic based on the uploaded file text
             if (styleAvg >= 3.3) {
-                // Visionary
-                styleText = "נראה שאתה מנהל המונע מחזון, משמעות ורצון לרתום אנשים לתהליכי שינוי.";
-                styleRec = "היוועצות פרקטית, העמקת ידע ויחידות התנסות (כדי לתרגם חזון למהלכים ישימים)";
+                // High Score = Visionary (4-5 in file)
+                // Using the full text from the file for section A
+                styleFullText = `
+                    <span class="block font-bold text-indigo-700 mb-2">נראה שאתה מנהל המונע מחזון, משמעות ורצון לרתום אנשים לתהליכי שינוי.</span>
+                    בית המדרש יכול להיות הזדמנות עבורך ללמוד ברצועות תוכן של 
+                    <strong class="bg-indigo-100 px-1 rounded text-indigo-800">היוועצות פרקטית, העמקת ידע ויחידות התנסות</strong>, 
+                    שיאפשרו לתרגם את החזון שלך למהלכים ישימים, לדייק סדירויות, 
+                    ולבחון יחד עם עמיתים כיצד מחברים בין רעיון גדול לניהול יומיומי אפקטיבי.
+                `;
             } else if (styleAvg <= 2.7) {
-                // Operational
-                styleText = "נראה שאתה מנהל תכליתי, מחויב לעשייה, ליישום ולניהול תהליך מובנה.";
-                styleRec = "שיחות השראה, חשיבה חזונית ומעגלי משמעות (לחיזוק ה\"לשם מה\" והניצוץ האישי)";
+                // Low Score = Operational (1-2 in file)
+                // Using the full text from the file for section B
+                styleFullText = `
+                    <span class="block font-bold text-indigo-700 mb-2">נראה שאתה מנהל תכליתי, מחויב לעשייה, ליישום ולניהול תהליך מובנה.</span>
+                    בית המדרש יכול להיות הזדמנות עבורך ללמידה ברצועות תוכן של 
+                    <strong class="bg-indigo-100 px-1 rounded text-indigo-800">שיחות השראה, חשיבה חזונית ומעגלי משמעות</strong>, 
+                    שיסייעו לחזק את תחושת ה"לשם מה", לחדד את הניצוץ האישי שלך בתוך תפיסת הלמידה, 
+                    ולהעמיק את החיבור הרגשי והערכי לתהליכי השינוי שאתה מוביל.
+                `;
             } else {
                 // Balanced
-                styleText = "אתה נמצא בשילוב מאוזן בין ראייה תפעולית לחזונית.";
-                styleRec = "שילוב בין העמקת ידע להתנסות מעשית";
+                styleFullText = `
+                    <span class="block font-bold text-indigo-700 mb-2">אתה נמצא בשילוב מאוזן בין הראייה התפעולית לחזונית.</span>
+                    בית המדרש מציע לך גמישות: תוכל לבחור לחזק את הצד הפרקטי באמצעות <strong>היוועצות והתנסות</strong>,
+                    או להעמיק את הרוח והחזון באמצעות <strong>שיחות השראה</strong>, בהתאם לאתגר הנוכחי שלך בבית הספר.
+                `;
             }
 
-            // 2. Content Analysis (Find Weakest Areas)
-            // Sort by value (ascending)
+            // 2. Content Analysis
             const sortedContent = [...contentAnswers].sort((a, b) => a.val - b.val);
             const weakItems = sortedContent.filter(item => item.val <= 3);
             
-            // Determine what to show
             let itemsToShow = [];
             if (weakItems.length > 0) {
-                itemsToShow = weakItems.slice(0, 3); // Take top 3 weakest
+                itemsToShow = weakItems.slice(0, 3);
             } else {
-                itemsToShow = sortedContent.slice(0, 2); // Take lowest even if high
+                itemsToShow = sortedContent.slice(0, 2);
             }
 
             // 3. Populate UI
-            document.getElementById('res-style-text').innerText = styleText;
-            document.getElementById('res-style-rec').innerText = styleRec;
+            document.getElementById('res-style-text').innerHTML = styleFullText; // Using innerHTML for bold tags
             
             const listEl = document.getElementById('res-content-list');
             listEl.innerHTML = '';
