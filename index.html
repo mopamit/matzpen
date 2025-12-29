@@ -104,7 +104,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center py-6 px-4 pb-16">
+<body class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
 
     <!-- Logo -->
     <img src="logo.png" alt="לוגו" class="absolute top-6 right-6 w-24 h-auto z-50 object-contain drop-shadow-md">
@@ -124,20 +124,25 @@
         <div class="relative z-10 flex-grow flex flex-col p-8 md:p-12 justify-center">
 
             <!-- SCREEN: INTRO -->
-            <div id="screen-intro" class="text-center space-y-6 animate__animated animate__fadeIn">
-                <div class="inline-block p-4 rounded-full bg-indigo-50 mb-2 shadow-sm">
-                    <span class="text-4xl">🧭</span>
+            <div id="screen-intro" class="text-center space-y-4 animate__animated animate__fadeIn">
+                <div class="inline-block p-6 rounded-full bg-indigo-50 mb-4 shadow-sm">
+                    <!-- Increased size to text-7xl -->
+                    <span class="text-7xl">🧭</span>
                 </div>
                 <div>
-                    <h1 class="text-4xl font-bold text-gray-800 mb-6 tracking-tight">המצפן הניהולי</h1>
+                    <h1 class="text-4xl font-bold text-gray-800 mb-2 tracking-tight">המצפן הניהולי</h1>
+                    
+                    <!-- Subtitle Centered -->
+                    <h2 class="text-2xl font-semibold text-indigo-600 mb-6">למידה מותאמת למידה</h2>
+
                     <div class="text-lg text-gray-700 font-light leading-relaxed space-y-4 max-w-2xl mx-auto text-right">
                         <p><strong>מנהל יקר,</strong></p>
-                        <p><strong>למידה מותאמת למידה –</strong><br>
+                        <p>
                         בבית המדרש הקרוב, נעסוק במנהיגות שלכם המנהלים, בהובלת השינוי. יתקיימו ארבע רצועות בחירה ובהן יחידות תוכן מגוונות משלושה סוגים – השראה, התנסות והיוועצות עמיתים.</p>
                         <p>אנחנו מזמינים אותך לבנות בעצמך את מסלול הלמידה וההתפתחות. השאלון הבא יאפשר לך התבוננות אישית קלילה על הזירות הניהוליות בהן אתה נמצא, ובאמצעותו נזמין אותך להפעיל שיקול דעת בבחירת יחידות התוכן הנכונות עבורך.</p>
                     </div>
                 </div>
-                <div class="pt-4">
+                <div class="pt-6">
                     <button onclick="startApp()" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-indigo-600 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-700 hover:shadow-lg transform hover:-translate-y-1">
                         מתחילים במסע 
                         <span class="mr-2 group-hover:translate-x-1 transition-transform">←</span>
@@ -233,7 +238,7 @@
             </div>
 
             <!-- SCREEN: PROCESSING -->
-            <div id="screen-processing" class="hidden flex-col items-center justify-center text-center space-y-6">
+            <div id="screen-processing" class="hidden w-full flex-grow flex-col items-center justify-center text-center space-y-6">
                 <div class="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
                 <h3 class="text-xl font-medium text-gray-700">מעבד את המסלול שלך...</h3>
             </div>
@@ -274,20 +279,20 @@
                         </div>
                     </div>
 
-                    <div class="text-center pt-2 pb-6">
+                    <div class="text-center pt-2 pb-6 flex flex-col items-center gap-6">
                         <button onclick="location.reload()" class="text-sm text-gray-400 hover:text-indigo-600 underline font-medium transition-colors">התחל מחדש את האבחון</button>
+                        
+                        <!-- Banner at the end of Results -->
+                        <a href="inst.html" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors shadow-md group text-sm font-medium w-full max-w-sm">
+                            <span>רוצים ליצור משהו כזה גם בקח"ל שלכם? כנסו לקישור</span>
+                            <span class="group-hover:translate-x-1 transition-transform">←</span>
+                        </a>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-
-    <!-- Fixed Bottom Banner -->
-    <a href="inst.html" target="_blank" class="fixed bottom-0 left-0 w-full bg-slate-900 hover:bg-slate-800 text-white text-center py-3 text-sm font-medium transition-colors z-50 flex items-center justify-center gap-2 shadow-lg group">
-        <span>רוצים ליצור משהו כזה גם בקח"ל שלכם? כנסו לקישור</span>
-        <span class="group-hover:translate-x-1 transition-transform">←</span>
-    </a>
 
     <!-- DATA & LOGIC -->
     <script>
