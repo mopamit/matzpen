@@ -85,9 +85,26 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #a0a0a0;
         }
+        
+        /* Festive Result Card */
+        .festive-card {
+            border: 1px solid #e5e7eb;
+            background: white;
+            position: relative;
+        }
+        .festive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #818cf8);
+            border-radius: 1rem 1rem 0 0;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+<body class="min-h-screen flex flex-col items-center justify-center py-6 px-4 pb-16">
 
     <!-- Logo -->
     <img src="logo.png" alt="לוגו" class="absolute top-6 right-6 w-24 h-auto z-50 object-contain drop-shadow-md">
@@ -98,7 +115,7 @@
     </div>
 
     <!-- Main Card Container -->
-    <div class="w-full max-w-3xl bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white/50 relative min-h-[550px] flex flex-col">
+    <div class="w-full max-w-3xl bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/60 relative min-h-[600px] flex flex-col">
         
         <!-- Decorative Background Circles -->
         <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-indigo-100 rounded-full blur-3xl opacity-50"></div>
@@ -107,21 +124,25 @@
         <div class="relative z-10 flex-grow flex flex-col p-8 md:p-12 justify-center">
 
             <!-- SCREEN: INTRO -->
-            <div id="screen-intro" class="text-center space-y-8 animate__animated animate__fadeIn">
-                <div class="inline-block p-4 rounded-full bg-indigo-50 mb-2">
+            <div id="screen-intro" class="text-center space-y-6 animate__animated animate__fadeIn">
+                <div class="inline-block p-4 rounded-full bg-indigo-50 mb-2 shadow-sm">
                     <span class="text-4xl">🧭</span>
                 </div>
                 <div>
-                    <h1 class="text-4xl font-bold text-gray-800 mb-4 tracking-tight">המצפן הניהולי</h1>
-                    <p class="text-xl text-gray-600 font-light leading-relaxed">
-                        בבית המדרש הקרוב, נעסוק במנהיגות שלכם המנהלים, בהובלת השינוי.<br>
-                        השאלון הבא יאפשר לך התבוננות אישית על הזירות הניהוליות בהן אתה נמצא.
-                    </p>
+                    <h1 class="text-4xl font-bold text-gray-800 mb-6 tracking-tight">המצפן הניהולי</h1>
+                    <div class="text-lg text-gray-700 font-light leading-relaxed space-y-4 max-w-2xl mx-auto text-right">
+                        <p><strong>מנהל יקר,</strong></p>
+                        <p><strong>למידה מותאמת למידה –</strong><br>
+                        בבית המדרש הקרוב, נעסוק במנהיגות שלכם המנהלים, בהובלת השינוי. יתקיימו ארבע רצועות בחירה ובהן יחידות תוכן מגוונות משלושה סוגים – השראה, התנסות והיוועצות עמיתים.</p>
+                        <p>אנחנו מזמינים אותך לבנות בעצמך את מסלול הלמידה וההתפתחות. השאלון הבא יאפשר לך התבוננות אישית קלילה על הזירות הניהוליות בהן אתה נמצא, ובאמצעותו נזמין אותך להפעיל שיקול דעת בבחירת יחידות התוכן הנכונות עבורך.</p>
+                    </div>
                 </div>
-                <button onclick="startApp()" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-indigo-600 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-700 hover:shadow-lg transform hover:-translate-y-1">
-                    מתחילים במסע 
-                    <span class="mr-2 group-hover:translate-x-1 transition-transform">←</span>
-                </button>
+                <div class="pt-4">
+                    <button onclick="startApp()" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-indigo-600 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-700 hover:shadow-lg transform hover:-translate-y-1">
+                        מתחילים במסע 
+                        <span class="mr-2 group-hover:translate-x-1 transition-transform">←</span>
+                    </button>
+                </div>
             </div>
 
             <!-- SCREEN: STYLE QUESTIONS (Slider) -->
@@ -139,8 +160,8 @@
                     <!-- Custom Range Slider Visuals -->
                     <div class="relative pt-1">
                         <div class="flex justify-between text-sm font-medium text-gray-600 mb-4 px-2 h-16 items-end">
-                            <span id="style-label-right" class="w-[45%] text-right text-indigo-800 font-bold leading-tight bg-white/50 p-2 rounded-lg"></span>
-                            <span id="style-label-left" class="w-[45%] text-left text-purple-800 font-bold leading-tight bg-white/50 p-2 rounded-lg"></span>
+                            <span id="style-label-right" class="w-[45%] text-right text-indigo-800 font-bold leading-tight bg-white/50 p-2 rounded-lg shadow-sm border border-white"></span>
+                            <span id="style-label-left" class="w-[45%] text-left text-purple-800 font-bold leading-tight bg-white/50 p-2 rounded-lg shadow-sm border border-white"></span>
                         </div>
                         
                         <input type="range" min="1" max="5" value="3" step="1" id="style-slider" class="w-full">
@@ -220,46 +241,53 @@
             <!-- SCREEN: RESULTS -->
             <div id="screen-results" class="hidden animate__animated animate__fadeInUp max-h-[80vh] overflow-y-auto custom-scrollbar p-2">
                 <div class="text-center mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800">סיכום והמלצה</h2>
-                    <p class="text-gray-500">המסלול המומלץ עבורך לבית המדרש</p>
+                    <h2 class="text-3xl font-bold text-gray-800 tracking-tight">המסלול המומלץ עבורך</h2>
+                    <p class="text-gray-500 mt-1">תוצאות האבחון האישי</p>
                 </div>
 
-                <div class="space-y-6">
+                <div class="space-y-8 px-2">
                     <!-- Style Card -->
-                    <div class="bg-white p-6 rounded-2xl border-t-4 border-indigo-500 shadow-md">
-                        <h3 class="text-lg font-bold text-indigo-900 mb-4 flex items-center">
-                            <span class="text-2xl ml-2">💡</span> הפרופיל הניהולי שלך
-                        </h3>
+                    <div class="festive-card rounded-2xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="text-3xl ml-3">💡</span> 
+                            <h3 class="text-xl font-bold text-gray-900">הפרופיל הניהולי</h3>
+                        </div>
                         
                         <!-- Full Text from file goes here -->
-                        <div id="res-style-text" class="text-gray-800 text-base mb-4 leading-relaxed bg-indigo-50/50 p-4 rounded-lg border border-indigo-50"></div>
+                        <div id="res-style-text" class="text-gray-800 text-lg leading-relaxed space-y-2"></div>
                     </div>
 
                     <!-- Content Card -->
-                    <div class="bg-white p-6 rounded-2xl border-t-4 border-green-500 shadow-md">
-                        <h3 class="text-lg font-bold text-green-900 mb-2 flex items-center">
-                            <span class="text-2xl ml-2">📊</span> המיקוד המקצועי
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-2">זיהינו שהתחומים הבאים דורשים חיזוק:</p>
-                        <ul id="res-content-list" class="list-disc list-inside text-sm text-gray-700 space-y-1 mb-4 font-medium">
+                    <div class="festive-card rounded-2xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="text-3xl ml-3">📊</span>
+                            <h3 class="text-xl font-bold text-gray-900">מיקוד מקצועי</h3>
+                        </div>
+                        <p class="text-gray-600 text-base mb-3">זיהינו שהתחומים הבאים דורשים חיזוק בבית הספר:</p>
+                        <ul id="res-content-list" class="list-disc list-inside text-gray-800 space-y-2 mb-6 font-medium text-lg bg-gray-50 p-4 rounded-lg border border-gray-100">
                             <!-- Weakest items injected here -->
                         </ul>
-                        <div class="bg-green-50 p-4 rounded-xl border border-green-100">
-                             <span class="block text-xs text-green-600 font-bold uppercase mb-1">ההמלצה שלנו:</span>
-                             <span class="text-green-800 font-bold leading-tight block">
-                                 לבחור סדנאות המעניקות כלים בתחומים אלו, בשילוב הגישה הניהולית שהומלצה לעיל.
+                        <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100 text-center">
+                             <span class="text-indigo-900 font-bold text-lg">
+                                 מומלץ לבחור סדנאות המעניקות כלים בתחומים אלו
                              </span>
                         </div>
                     </div>
 
-                    <div class="text-center pt-4 pb-8">
-                        <button onclick="location.reload()" class="text-sm text-gray-400 hover:text-indigo-600 underline">התחל מחדש</button>
+                    <div class="text-center pt-2 pb-6">
+                        <button onclick="location.reload()" class="text-sm text-gray-400 hover:text-indigo-600 underline font-medium transition-colors">התחל מחדש את האבחון</button>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <!-- Fixed Bottom Banner -->
+    <a href="inst.html" target="_blank" class="fixed bottom-0 left-0 w-full bg-slate-900 hover:bg-slate-800 text-white text-center py-3 text-sm font-medium transition-colors z-50 flex items-center justify-center gap-2 shadow-lg group">
+        <span>רוצים ליצור משהו כזה גם בקח"ל שלכם? כנסו לקישור</span>
+        <span class="group-hover:translate-x-1 transition-transform">←</span>
+    </a>
 
     <!-- DATA & LOGIC -->
     <script>
@@ -489,33 +517,33 @@
 
             let styleFullText = "";
             
-            // Logic based on the uploaded file text
+            // Logic based on the provided text
             if (styleAvg >= 3.3) {
-                // High Score = Visionary (4-5 in file)
-                // Using the full text from the file for section A
+                // High Score = Visionary (4-5)
                 styleFullText = `
-                    <span class="block font-bold text-indigo-700 mb-2">נראה שאתה מנהל המונע מחזון, משמעות ורצון לרתום אנשים לתהליכי שינוי.</span>
-                    בית המדרש יכול להיות הזדמנות עבורך ללמוד ברצועות תוכן של 
-                    <strong class="bg-indigo-100 px-1 rounded text-indigo-800">היוועצות פרקטית, העמקת ידע ויחידות התנסות</strong>, 
-                    שיאפשרו לתרגם את החזון שלך למהלכים ישימים, לדייק סדירויות, 
-                    ולבחון יחד עם עמיתים כיצד מחברים בין רעיון גדול לניהול יומיומי אפקטיבי.
+                    <p class="font-bold text-indigo-700 mb-3 text-xl">א. אם ברוב השאלות סימנת לכיוון 4–5</p>
+                    <p class="mb-3">נראה שאתה מנהל המונע מחזון, משמעות ורצון לרתום אנשים לתהליכי שינוי.</p>
+                    <div class="bg-indigo-50 border-r-4 border-indigo-500 p-4 rounded-lg">
+                        <p>בית המדרש יכול להיות הזדמנות עבורך ללמוד ברצועות תוכן של <span class="text-indigo-800 font-extrabold text-lg px-1">היוועצות פרקטית, העמקת ידע ויחידות התנסות</span>, שיאפשרו לתרגם את החזון שלך למהלכים ישימים, לדייק סדירויות, ולבחון יחד עם עמיתים כיצד מחברים בין רעיון גדול לניהול יומיומי אפקטיבי.</p>
+                    </div>
                 `;
             } else if (styleAvg <= 2.7) {
-                // Low Score = Operational (1-2 in file)
-                // Using the full text from the file for section B
+                // Low Score = Operational (1-2)
                 styleFullText = `
-                    <span class="block font-bold text-indigo-700 mb-2">נראה שאתה מנהל תכליתי, מחויב לעשייה, ליישום ולניהול תהליך מובנה.</span>
-                    בית המדרש יכול להיות הזדמנות עבורך ללמידה ברצועות תוכן של 
-                    <strong class="bg-indigo-100 px-1 rounded text-indigo-800">שיחות השראה, חשיבה חזונית ומעגלי משמעות</strong>, 
-                    שיסייעו לחזק את תחושת ה"לשם מה", לחדד את הניצוץ האישי שלך בתוך תפיסת הלמידה, 
-                    ולהעמיק את החיבור הרגשי והערכי לתהליכי השינוי שאתה מוביל.
+                    <p class="font-bold text-indigo-700 mb-3 text-xl">ב. אם ברוב השאלות סימנת לכיוון 1–2</p>
+                    <p class="mb-3">נראה שאתה מנהל תכליתי, מחויב לעשייה, ליישום ולניהול תהליך מובנה.</p>
+                    <div class="bg-indigo-50 border-r-4 border-indigo-500 p-4 rounded-lg">
+                        <p>בית המדרש יכול להיות הזדמנות עבורך ללמידה ברצועות תוכן של <span class="text-indigo-800 font-extrabold text-lg px-1">שיחות השראה, חשיבה חזונית ומעגלי משמעות</span>, שיסייעו לחזק את תחושת ה“לשם מה”, לחדד את הניצוץ האישי שלך בתוך תפיסת הלמידה, ולהעמיק את החיבור הרגשי והערכי לתהליכי השינוי שאתה מוביל.</p>
+                    </div>
                 `;
             } else {
                 // Balanced
                 styleFullText = `
-                    <span class="block font-bold text-indigo-700 mb-2">אתה נמצא בשילוב מאוזן בין הראייה התפעולית לחזונית.</span>
-                    בית המדרש מציע לך גמישות: תוכל לבחור לחזק את הצד הפרקטי באמצעות <strong>היוועצות והתנסות</strong>,
-                    או להעמיק את הרוח והחזון באמצעות <strong>שיחות השראה</strong>, בהתאם לאתגר הנוכחי שלך בבית הספר.
+                    <p class="font-bold text-indigo-700 mb-3 text-xl">ג. פרופיל משולב</p>
+                    <p class="mb-3">אתה נמצא בשילוב מאוזן בין הראייה התפעולית לחזונית.</p>
+                    <div class="bg-indigo-50 border-r-4 border-indigo-500 p-4 rounded-lg">
+                        <p>בית המדרש מציע לך גמישות: תוכל לבחור לחזק את הצד הפרקטי באמצעות <span class="text-indigo-800 font-extrabold text-lg px-1">היוועצות והתנסות</span>, או להעמיק את הרוח והחזון באמצעות <span class="text-indigo-800 font-extrabold text-lg px-1">שיחות השראה</span>, בהתאם לאתגר הנוכחי שלך בבית הספר.</p>
+                    </div>
                 `;
             }
 
@@ -531,7 +559,7 @@
             }
 
             // 3. Populate UI
-            document.getElementById('res-style-text').innerHTML = styleFullText; // Using innerHTML for bold tags
+            document.getElementById('res-style-text').innerHTML = styleFullText; 
             
             const listEl = document.getElementById('res-content-list');
             listEl.innerHTML = '';
