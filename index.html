@@ -82,7 +82,7 @@
     </div>
 
     <!-- Main Card Container -->
-    <div class="w-full max-w-2xl bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white/50 relative min-h-[500px] flex flex-col">
+    <div class="w-full max-w-3xl bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white/50 relative min-h-[550px] flex flex-col">
         
         <!-- Decorative Background Circles -->
         <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-indigo-100 rounded-full blur-3xl opacity-50"></div>
@@ -97,52 +97,55 @@
                 </div>
                 <div>
                     <h1 class="text-4xl font-bold text-gray-800 mb-4 tracking-tight">המצפן הניהולי</h1>
-                    <p class="text-xl text-gray-600 font-light">
-                        בואו נצא למסע קצר לגילוי סגנון הניהול שלך<br>ובניית המסלול המדויק עבורך בבית המדרש.
+                    <p class="text-xl text-gray-600 font-light leading-relaxed">
+                        בבית המדרש הקרוב, נעסוק במנהיגות שלכם המנהלים, בהובלת השינוי.<br>
+                        השאלון הבא יאפשר לך התבוננות אישית על הזירות הניהוליות בהן אתה נמצא.
                     </p>
                 </div>
                 <button onclick="startApp()" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-indigo-600 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-700 hover:shadow-lg transform hover:-translate-y-1">
-                    מתחילים! 
+                    מתחילים במסע 
                     <span class="mr-2 group-hover:translate-x-1 transition-transform">←</span>
                 </button>
             </div>
 
             <!-- SCREEN: STYLE QUESTIONS (Slider) -->
             <div id="screen-style" class="hidden h-full flex flex-col justify-between">
-                <div class="text-center mb-8">
-                    <span class="text-xs font-bold tracking-widest text-indigo-500 uppercase">חלק א: הסגנון שלי</span>
-                    <h2 id="style-q-text" class="text-2xl font-bold text-gray-800 mt-2 h-20 flex items-center justify-center">
+                <div class="text-center mb-6">
+                    <span id="arena-badge" class="px-3 py-1 rounded-full text-xs font-bold tracking-widest bg-indigo-100 text-indigo-600 uppercase mb-2 inline-block">
+                        <!-- Arena Name Here -->
+                    </span>
+                    <h2 id="style-q-text" class="text-xl md:text-2xl font-bold text-gray-800 mt-2 h-24 flex items-center justify-center px-4">
                         <!-- Question Text Injected Here -->
                     </h2>
                 </div>
 
-                <div class="flex-grow flex flex-col justify-center space-y-10">
+                <div class="flex-grow flex flex-col justify-center space-y-8">
                     <!-- Custom Range Slider Visuals -->
                     <div class="relative pt-1">
-                        <div class="flex justify-between text-sm font-medium text-gray-500 mb-4 px-2">
-                            <span id="style-label-right" class="w-1/3 text-right text-indigo-800 font-bold"></span>
-                            <span id="style-label-left" class="w-1/3 text-left text-purple-800 font-bold"></span>
+                        <div class="flex justify-between text-sm font-medium text-gray-600 mb-4 px-2 h-16 items-end">
+                            <span id="style-label-right" class="w-[45%] text-right text-indigo-800 font-bold leading-tight bg-white/50 p-2 rounded-lg"></span>
+                            <span id="style-label-left" class="w-[45%] text-left text-purple-800 font-bold leading-tight bg-white/50 p-2 rounded-lg"></span>
                         </div>
                         
                         <input type="range" min="1" max="5" value="3" step="1" id="style-slider" class="w-full">
                         
-                        <div class="flex justify-between text-xs text-gray-400 mt-2 px-1">
-                            <span>ביצוע</span>
+                        <div class="flex justify-between text-xs text-gray-400 mt-2 px-1 font-mono">
+                            <span>1 (תכליתי)</span>
                             <span>|</span>
+                            <span>3 (משלב)</span>
                             <span>|</span>
-                            <span>|</span>
-                            <span>חזון</span>
+                            <span>5 (חזוני)</span>
                         </div>
                     </div>
 
-                    <div class="text-center p-4 bg-gray-50 rounded-xl border border-gray-100 text-gray-600 text-sm italic" id="feedback-text">
+                    <div class="text-center p-3 bg-gray-50 rounded-xl border border-gray-100 text-gray-600 text-sm italic" id="feedback-text">
                         הזיזו את המתג כדי לבחור את המיקום המדויק שלכם
                     </div>
                 </div>
 
-                <div class="mt-8 flex justify-center">
-                    <button onclick="nextStyleQuestion()" class="bg-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-indigo-700 hover:scale-110 transition-all duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="mt-6 flex justify-center">
+                    <button onclick="nextStyleQuestion()" class="bg-indigo-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-indigo-700 hover:scale-110 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                     </button>
@@ -151,25 +154,27 @@
 
             <!-- SCREEN: TRANSITION -->
             <div id="screen-transition" class="hidden text-center animate__animated animate__fadeIn">
-                <div class="text-6xl mb-6 animate-bounce">✨</div>
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">מצוין!</h2>
-                <p class="text-xl text-gray-600">עכשיו נעבור למיפוי קצר של הצרכים בבית הספר...</p>
+                <div class="text-6xl mb-6 animate-bounce">🎯</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">תודה על הכנות!</h2>
+                <p class="text-xl text-gray-600 max-w-md mx-auto">
+                    כדי שנוכל למקד אותך בסדנאות המדויקות ביותר, נעבור לתרגיל קצר של מיפוי צרכים.
+                </p>
             </div>
 
             <!-- SCREEN: CONTENT QUESTIONS (Rating Buttons) -->
             <div id="screen-content" class="hidden h-full flex flex-col justify-between">
                 <div class="text-center mb-6">
                     <span class="text-xs font-bold tracking-widest text-green-600 uppercase">חלק ב: מיפוי צרכים</span>
-                    <h2 id="content-q-title" class="text-xl md:text-2xl font-bold text-gray-800 mt-2">
+                    <h2 id="content-q-title" class="text-xl md:text-2xl font-bold text-gray-800 mt-2 px-4">
                         <!-- Content Title Injected Here -->
                     </h2>
-                    <p class="text-gray-500 mt-2 text-sm">עד כמה התחום הזה מוטמע אצלכם?</p>
+                    <p class="text-gray-500 mt-2 text-sm">עד כמה התחום הזה מיושם/מבוצע אצלך?</p>
                 </div>
 
                 <div class="flex-grow flex flex-col items-center justify-center space-y-6">
                     <div class="flex w-full justify-between items-center max-w-md px-2">
-                        <span class="text-sm text-gray-400">טעון שיפור</span>
-                        <span class="text-sm text-gray-400">חזק מאוד</span>
+                        <span class="text-sm text-gray-400">רמת ביצוע נמוכה</span>
+                        <span class="text-sm text-gray-400">רמת ביצוע גבוהה</span>
                     </div>
                     
                     <div class="flex w-full justify-between max-w-md gap-2" id="rating-container">
@@ -182,8 +187,8 @@
                 </div>
 
                 <div class="mt-8 flex justify-center opacity-0 transition-opacity duration-300" id="content-next-btn">
-                     <button onclick="nextContentQuestion()" class="bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-green-700 hover:scale-110 transition-all duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <button onclick="nextContentQuestion()" class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-700 hover:scale-110 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                     </button>
@@ -193,49 +198,48 @@
             <!-- SCREEN: PROCESSING -->
             <div id="screen-processing" class="hidden flex-col items-center justify-center text-center space-y-6">
                 <div class="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
-                <h3 class="text-xl font-medium text-gray-700">מעבד נתונים...</h3>
+                <h3 class="text-xl font-medium text-gray-700">מעבד את המסלול שלך...</h3>
             </div>
 
             <!-- SCREEN: RESULTS -->
-            <div id="screen-results" class="hidden animate__animated animate__fadeInUp">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-gray-800">הפרופיל שלך</h2>
-                    <p class="text-gray-500">הנה ההמלצה שלנו לבית המדרש</p>
+            <div id="screen-results" class="hidden animate__animated animate__fadeInUp max-h-[80vh] overflow-y-auto custom-scrollbar p-2">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">סיכום והמלצה</h2>
+                    <p class="text-gray-500">המסלול המומלץ עבורך לבית המדרש</p>
                 </div>
 
                 <div class="space-y-6">
                     <!-- Style Card -->
-                    <div class="bg-gradient-to-br from-indigo-50 to-white p-6 rounded-2xl border border-indigo-100 shadow-sm relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-2 h-full bg-indigo-500"></div>
-                        <h3 class="text-lg font-bold text-indigo-800 mb-2 flex items-center">
-                            <span class="text-2xl ml-2">👤</span> הסגנון הניהולי
+                    <div class="bg-white p-6 rounded-2xl border-t-4 border-indigo-500 shadow-md">
+                        <h3 class="text-lg font-bold text-indigo-900 mb-2 flex items-center">
+                            <span class="text-2xl ml-2">💡</span> הפרופיל הניהולי שלך
                         </h3>
-                        <p id="res-style-text" class="text-gray-700 text-sm mb-3 leading-relaxed"></p>
-                        <div class="bg-white/50 p-3 rounded-lg border border-indigo-100">
-                             <span class="block text-xs text-gray-500 font-bold uppercase">מסלול מומלץ:</span>
-                             <span id="res-style-rec" class="text-indigo-700 font-bold text-lg"></span>
+                        <p id="res-style-text" class="text-gray-700 text-sm mb-4 leading-relaxed font-medium"></p>
+                        
+                        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                             <span class="block text-xs text-indigo-500 font-bold uppercase mb-1">רצועות תוכן מומלצות:</span>
+                             <span id="res-style-rec" class="text-indigo-700 font-bold text-lg leading-tight block"></span>
                         </div>
                     </div>
 
                     <!-- Content Card -->
-                    <div class="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-100 shadow-sm relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-2 h-full bg-green-500"></div>
-                        <h3 class="text-lg font-bold text-green-800 mb-2 flex items-center">
-                            <span class="text-2xl ml-2">📚</span> מיקוד תוכן
+                    <div class="bg-white p-6 rounded-2xl border-t-4 border-green-500 shadow-md">
+                        <h3 class="text-lg font-bold text-green-900 mb-2 flex items-center">
+                            <span class="text-2xl ml-2">📊</span> המיקוד המקצועי
                         </h3>
-                        <p id="res-content-text" class="text-gray-700 text-sm mb-3 leading-relaxed"></p>
-                        <div class="bg-white/50 p-3 rounded-lg border border-green-100">
-                             <span class="block text-xs text-gray-500 font-bold uppercase">נושא מומלץ:</span>
-                             <span id="res-content-rec" class="text-green-700 font-bold text-lg"></span>
+                        <p class="text-gray-600 text-sm mb-2">זיהינו שהתחומים הבאים דורשים חיזוק:</p>
+                        <ul id="res-content-list" class="list-disc list-inside text-sm text-gray-700 space-y-1 mb-4">
+                            <!-- Weakest items injected here -->
+                        </ul>
+                        <div class="bg-green-50 p-4 rounded-xl border border-green-100">
+                             <span class="block text-xs text-green-600 font-bold uppercase mb-1">ההמלצה שלנו:</span>
+                             <span class="text-green-800 font-bold leading-tight block">
+                                 לבחור סדנאות המעניקות כלים בתחומים אלו, בשילוב הגישה הניהולית שהומלצה לעיל.
+                             </span>
                         </div>
                     </div>
 
-                    <!-- Final Summary -->
-                    <div class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg text-center">
-                         <p id="res-summary" class="text-lg font-medium opacity-90 leading-relaxed"></p>
-                    </div>
-
-                    <div class="text-center pt-4">
+                    <div class="text-center pt-4 pb-8">
                         <button onclick="location.reload()" class="text-sm text-gray-400 hover:text-indigo-600 underline">התחל מחדש</button>
                     </div>
                 </div>
@@ -247,47 +251,89 @@
     <!-- DATA & LOGIC -->
     <script>
         // --- DATA ---
+        // Questions updated from file: בחן את עצמך למנהלים לקראת בית המדרש (1).docx
         const styleQuestions = [
+            // Arena A: Learning Perception
             {
-                q: "כשעולה שיח על שינוי פדגוגי...",
-                right: "אני מיד חושב על סדירויות וכח אדם",
-                left: "אני חושב אילו אפשרויות יפתחו"
+                arena: "זירה א: הטמעת תפיסת הלמידה",
+                q: "כשעולה שיח על שינוי פדגוגי בבית הספר...",
+                right: "חושב כיצד לתרגם את השינוי לסדירויות, מערכות ונהלים",
+                left: "שואל כיצד השינוי יפתח את השותפים ויחזק משמעות"
             },
             {
-                q: "כשמורים מתקשים לאמץ תפיסה...",
-                right: "מפרק לצעדים פרקטיים לפתרון",
-                left: "מחבר ל'לשם מה' ולרעיון הגדול"
+                arena: "זירה א: הטמעת תפיסת הלמידה",
+                q: "כשמורים מתקשים לאמץ תפיסת למידה חדשה...",
+                right: "נוטה להמשיך לקדם את הכיוון גם כשהיישום מורכב",
+                left: "עוצר לחבר מחדש לרעיון הגדול ול\"לשם מה\""
             },
             {
-                q: "בחשיבה קדימה על בית הספר...",
-                right: "בונה תוכנית עבודה מסודרת לשנתיים",
-                left: "מדמיין את החלום והקומה הבאה"
+                arena: "זירה א: הטמעת תפיסת הלמידה",
+                q: "כשאני חושב קדימה על תהליכי הלמידה...",
+                right: "חשוב לי לבנות תהליך ברור לשנה-שנתיים הקרובות",
+                left: "מדמיין את הקומה הבאה והמחוזות החדשים שיפתחו"
+            },
+            // Arena B: Tzaam / Mentoring
+            {
+                arena: "זירה ב: הטמעת תצא\"מ (מנטורינג)",
+                q: "ביחס לליווי אישי של תלמידים...",
+                right: "בוחן היתכנות: כוח אדם, משאבים ועלויות",
+                left: "מתרגש מהחזון ושואל כיצד נגיע לכל תלמיד"
             },
             {
-                q: "בנוגע לליווי אישי (מנטורינג)...",
-                right: "מתרגם לעלויות ושיבוץ במערכת",
-                left: "מתרגש מההזדמנות לגעת בלב התלמיד"
+                arena: "זירה ב: הטמעת תצא\"מ (מנטורינג)",
+                q: "בעיניי, המפתח להטמעת תצא\"מ בבית הספר הוא...",
+                right: "נוכחות עקבית ועמידה של הצוות בכל הסדירויות",
+                left: "חיבור פנימי של הצוות לרעיון ולמשמעות"
             },
             {
-                q: "תפיסת התפקיד מול הצוות...",
-                right: "נוכחות פעילה וניהול השוטף",
-                left: "חיבור רגשי וערכי לתהליך"
+                arena: "זירה ב: הטמעת תצא\"מ (מנטורינג)",
+                q: "כשאני חושב על הצוות כמנטורים...",
+                right: "חשוב לי בעיקר שיבצעו את התפקיד כפי שהוגדר",
+                left: "חשוב לי שיראו בעצמם דמויות משפיעות ומשמעותיות"
+            },
+            // Arena C: Leadership
+            {
+                arena: "זירה ג: יכולות ניהול והובלת שינוי",
+                q: "רוב אנשי הצוות בבית הספר...",
+                right: "ממתינים לכיוון, להחלטות ולהנחיה",
+                left: "יוזמים, מציעים רעיונות ולוקחים אחריות"
+            },
+            {
+                arena: "זירה ג: יכולות ניהול והובלת שינוי",
+                q: "השיח בצוותי ההובלה...",
+                right: "מתמקד בעיקר במשימות, בבעיות ובשוטף",
+                left: "כולל גם משמעות, ערכים וחזון"
+            },
+            {
+                arena: "זירה ג: יכולות ניהול והובלת שינוי",
+                q: "במפגש עם עומס ושחיקה...",
+                right: "קשה לי לגייס מחדש אנרגיה ורתימה רחבה",
+                left: "יש לי כלים להחזיר אנרגיה, משמעות ותקווה"
+            },
+            {
+                arena: "זירה ג: יכולות ניהול והובלת שינוי",
+                q: "באופן אישי, בתפקידי כמנהל/ת...",
+                right: "אני עסוק בעיקר בניהול השוטף",
+                left: "אני עסוק גם בהובלה, בהשראה ובעיצוב כיוון"
             }
         ];
 
         const contentQuestions = [
-            { id: 'tzaam', title: 'מערכת שעות וסדירויות (תצא"מ)', name: 'סדירויות ותצא"מ', focus: 'בניית סדירויות פדגוגיות' },
-            { id: 'team', title: 'מפגשי צוות ופיתוח מקצועי', name: 'פיתוח צוות ומנהיגות', focus: 'רתימת צוות ומנהיגות' },
-            { id: 'tech', title: 'שימוש בנתונים וטכנולוגיה', name: 'טכנולוגיה ונתונים', focus: 'טכנולוגיה וניהול נתונים' },
-            { id: 'pedagogy', title: 'מבנה הוראה (שערים/תחומים)', name: 'מבנה הוראה', focus: 'פדגוגיה וחלוקת ידע' }
+            { id: 'schedule', title: 'מערכת שעות התומכת בתפיסת הלמידה' },
+            { id: 'team_routines', title: 'מערכת סדירויות להתפתחות הצוות' },
+            { id: 'team_vision', title: 'מפגשי מליאת צוות המחזקים את החזון' },
+            { id: 'data', title: 'למידה מבוססת נתונים (LMS/EMS)' },
+            { id: 'gateways', title: 'מקצועות הלימוד נלמדים בחלוקה לשערים' },
+            { id: 'objections', title: 'יכולת לתת מענה להתנגדויות מקצועיות' },
+            { id: 'engagement', title: 'רתימת צוותי ההוראה לתהליך השינוי' }
         ];
 
         // --- STATE ---
-        let currentStep = 'intro'; // intro, style, transition, content, processing, results
+        let currentStep = 'intro';
         let styleIdx = 0;
         let contentIdx = 0;
         let styleAnswers = [];
-        let contentAnswers = []; // Array of objects {id, val, ...}
+        let contentAnswers = [];
 
         // --- DOM ELEMENTS ---
         const progressBar = document.getElementById('progress-bar');
@@ -309,7 +355,6 @@
             fromEl.classList.add('hidden');
             toEl.classList.remove('hidden');
             
-            // Add animation class to new screen
             toEl.classList.add('card-enter');
             setTimeout(() => toEl.classList.remove('card-enter'), 500);
         }
@@ -324,11 +369,11 @@
 
         function loadStyleQuestion() {
             const q = styleQuestions[styleIdx];
+            document.getElementById('arena-badge').innerText = q.arena;
             document.getElementById('style-q-text').innerText = q.q;
             document.getElementById('style-label-right').innerText = q.right;
             document.getElementById('style-label-left').innerText = q.left;
             
-            // Reset slider to middle
             const slider = document.getElementById('style-slider');
             slider.value = 3;
             updateSliderFeedback(3);
@@ -340,11 +385,14 @@
 
         function updateSliderFeedback(val) {
             const fb = document.getElementById('feedback-text');
-            if(val == 1) fb.innerText = "אני לגמרי בצד הביצועי/תפעולי";
-            else if(val == 2) fb.innerText = "נוטה יותר לביצוע וסדר";
+            // Logic updated to match new questions direction
+            // 1 = Right side (Execution/Structure)
+            // 5 = Left side (Vision/Meaning)
+            if(val == 1) fb.innerText = "אני מזדהה בעיקר עם הצד התכליתי/ביצועי";
+            else if(val == 2) fb.innerText = "נוטה לצד התכליתי";
             else if(val == 3) fb.innerText = "אני משלב/ת בין העולמות";
-            else if(val == 4) fb.innerText = "נוטה יותר לחזון ורעיון";
-            else if(val == 5) fb.innerText = "אני לגמרי בצד החזוני/רעיוני";
+            else if(val == 4) fb.innerText = "נוטה לצד החזוני";
+            else if(val == 5) fb.innerText = "אני מזדהה בעיקר עם הצד החזוני/רעיוני";
         }
 
         function nextStyleQuestion() {
@@ -354,22 +402,20 @@
 
             styleIdx++;
             if (styleIdx < styleQuestions.length) {
-                // Animate out current content slightly before loading next
                 const container = document.getElementById('screen-style');
                 container.classList.add('card-exit');
                 setTimeout(() => {
                     container.classList.remove('card-exit');
-                    container.classList.add('card-enter'); // Re-enter animation
+                    container.classList.add('card-enter');
                     loadStyleQuestion();
                     setTimeout(() => container.classList.remove('card-enter'), 500);
                 }, 300);
             } else {
-                // Done with Style -> Go to Transition
                 switchScreen('screen-style', 'screen-transition');
                 setTimeout(() => {
                     switchScreen('screen-transition', 'screen-content');
                     loadContentQuestion();
-                }, 2500);
+                }, 3500);
             }
         }
 
@@ -379,22 +425,16 @@
             const q = contentQuestions[contentIdx];
             document.getElementById('content-q-title').innerText = q.title;
             
-            // Reset buttons
             document.querySelectorAll('.rating-btn').forEach(btn => btn.classList.remove('selected'));
             document.getElementById('content-next-btn').classList.add('opacity-0', 'pointer-events-none');
         }
 
         function selectRating(val) {
-            // Visual selection
             document.querySelectorAll('.rating-btn').forEach(btn => {
                 btn.classList.remove('selected');
                 if(parseInt(btn.innerText) === val) btn.classList.add('selected');
             });
-
-            // Store temporary value
             window.currentContentRating = val;
-
-            // Show Next Button
             const nextBtn = document.getElementById('content-next-btn');
             nextBtn.classList.remove('opacity-0', 'pointer-events-none');
         }
@@ -428,57 +468,61 @@
             setTimeout(() => {
                 calculateAndShowResults();
                 switchScreen('screen-processing', 'screen-results');
-                progressContainer.classList.add('hidden'); // Hide progress bar at end
+                progressContainer.classList.add('hidden');
             }, 2000);
         }
 
         function calculateAndShowResults() {
-            // 1. Style Analysis
+            // 1. Style Analysis (Updated Logic)
             const styleSum = styleAnswers.reduce((a, b) => a + b, 0);
             const styleAvg = styleSum / styleAnswers.length;
 
             let styleText = "";
             let styleRec = "";
-            let styleType = ""; 
+            
+            // Logic from file:
+            // High score (4-5) = Visionary -> Needs Practical tools
+            // Low score (1-2) = Execution/Operational -> Needs Inspiration
 
-            if (styleAvg >= 3.5) {
-                styleType = "vision";
-                styleText = "הפרופיל שלך הוא של מנהל/ת \"חזוני/ת\". את/ה רואה למרחוק, מחובר/ת לרעיונות הגדולים ולמשמעות. האתגר שלך הוא לעיתים בהורדת הרעיונות לקרקע הפרקטית.";
-                styleRec = "היוועצות והתנסות מעשית (Focus on Execution)";
-            } else if (styleAvg <= 2.5) {
-                styleType = "execution";
-                styleText = "הפרופיל שלך הוא של מנהל/ת \"ביצועיסט/ית\". את/ה אלוף/ה בתרגום משימות למעשים, בסדר ובארגון. האתגר הוא לעיתים לעצור ולהתחבר לרוח ולחזון.";
-                styleRec = "שיחות השראה וחיבור ללשם מה (Focus on Vision)";
+            if (styleAvg >= 3.3) {
+                // Visionary
+                styleText = "נראה שאתה מנהל המונע מחזון, משמעות ורצון לרתום אנשים לתהליכי שינוי.";
+                styleRec = "היוועצות פרקטית, העמקת ידע ויחידות התנסות (כדי לתרגם חזון למהלכים ישימים)";
+            } else if (styleAvg <= 2.7) {
+                // Operational
+                styleText = "נראה שאתה מנהל תכליתי, מחויב לעשייה, ליישום ולניהול תהליך מובנה.";
+                styleRec = "שיחות השראה, חשיבה חזונית ומעגלי משמעות (לחיזוק ה\"לשם מה\" והניצוץ האישי)";
             } else {
-                styleType = "balanced";
-                styleText = "את/ה נמצא/ת באיזון מרשים בין הראייה התפעולית לחזונית. את/ה יודע/ת לשלב בין החלום למעשה בצורה מאוזנת.";
-                styleRec = "שילוב של התנסות מעשית עם העמקת הידע";
+                // Balanced
+                styleText = "אתה נמצא בשילוב מאוזן בין ראייה תפעולית לחזונית.";
+                styleRec = "שילוב בין העמקת ידע להתנסות מעשית";
             }
 
-            // 2. Content Analysis (Find Weakest)
-            // Sort by value (ascending), then by original index for stability
+            // 2. Content Analysis (Find Weakest Areas)
+            // Sort by value (ascending)
             const sortedContent = [...contentAnswers].sort((a, b) => a.val - b.val);
-            const weakest = sortedContent[0];
+            const weakItems = sortedContent.filter(item => item.val <= 3);
+            
+            // Determine what to show
+            let itemsToShow = [];
+            if (weakItems.length > 0) {
+                itemsToShow = weakItems.slice(0, 3); // Take top 3 weakest
+            } else {
+                itemsToShow = sortedContent.slice(0, 2); // Take lowest even if high
+            }
 
             // 3. Populate UI
             document.getElementById('res-style-text').innerText = styleText;
             document.getElementById('res-style-rec').innerText = styleRec;
             
-            document.getElementById('res-content-text').innerText = `מתוך המיפוי עולה כי התחום של "${weakest.name}" הוא הזדמנות הצמיחה המשמעותית ביותר עבורך כרגע.`;
-            document.getElementById('res-content-rec').innerText = weakest.focus;
-
-            // 4. Summary
-            let summary = "";
-            if (styleType === "vision") {
-                summary = `לסיכום: כדי להגשים את החזון שלך בתחום ה${weakest.name}, המסלול המדויק עבורך הוא כזה שיתן לך כלים פרקטיים ליישום (התנסות).`;
-            } else if (styleType === "execution") {
-                summary = `לסיכום: כדי להטמיע בהצלחה תהליכים של ${weakest.name}, המסלול המדויק עבורך הוא כזה שיתן לך השראה וחיבור למהות (רוח).`;
-            } else {
-                summary = `לסיכום: מומלץ להתמקד בסדנאות ${weakest.name} המשלבות למידה של תשתיות עם חשיבה על העתיד.`;
-            }
-            document.getElementById('res-summary').innerText = summary;
+            const listEl = document.getElementById('res-content-list');
+            listEl.innerHTML = '';
+            itemsToShow.forEach(item => {
+                const li = document.createElement('li');
+                li.innerText = item.title;
+                listEl.appendChild(li);
+            });
         }
-
     </script>
 </body>
 </html>
