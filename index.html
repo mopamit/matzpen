@@ -102,6 +102,15 @@
             background: linear-gradient(90deg, #4f46e5, #818cf8);
             border-radius: 1rem 1rem 0 0;
         }
+
+        /* Gentle Heartbeat Animation for Button */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+            50% { transform: scale(1.03); box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.3), 0 10px 10px -5px rgba(79, 70, 229, 0.1); }
+        }
+        .animate-heartbeat {
+            animation: heartbeat 2.5s infinite ease-in-out;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
@@ -286,6 +295,12 @@
                     </div>
 
                     <div class="text-center pt-2 pb-6 flex flex-col items-center gap-6">
+                        
+                        <!-- Registration Button -->
+                        <a href="https://docs.google.com/forms/d/1Y_-Fl_YedZjz81R6H5a8tjPUyBitkv_lmEPrJepJcvw/preview" target="_blank" class="animate-heartbeat block w-full max-w-sm mx-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-full shadow-xl transform transition hover:scale-105 text-center text-xl mb-2">
+                            רישום לסדנאות
+                        </a>
+
                         <button onclick="location.reload()" class="text-sm text-gray-400 hover:text-indigo-600 underline font-medium transition-colors">התחל מחדש את האבחון</button>
                         
                         <!-- Banner at the end of Results -->
